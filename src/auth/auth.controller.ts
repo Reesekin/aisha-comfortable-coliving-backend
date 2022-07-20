@@ -12,8 +12,8 @@ import { RolesGuard } from './guards/roles.guard';
 export class AuthController {
   constructor(private authService: AuthService) {}
   @Post("register")
-  registerUser(@Body() user: User, @Request() req): Observable<User> {
-    return from(this.authService.registerUser(user, req));
+  registerUser(@Body() user: User): Observable<User> {
+    return from(this.authService.registerUser(user));
   }
   @Roles(Role.ADMIN)
   @UseGuards(JwtGuard, RolesGuard)

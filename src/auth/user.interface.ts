@@ -1,30 +1,38 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Login {
+export interface Login {
   email: string
   password: string
 }
 
-export interface User {
+export interface User { //Regristration data
   createdAt?: Date;
   id?: number;
   username: string;
   password: string;
   email: string;
   role?: string;
+  bio?: string;
+  accounttype?: string;
+  livingStatus?: boolean
   firstname: string;
   lastname: string;
 }
 
-export enum Role {
-  USER = 'USER',
-  TENANT = 'TENANT',
-  HOMEOWNER = 'HOMEOWNER',
-  ADMIN = 'ADMIN',
+export enum AccountType {
+  TENANT = 'Tenant',
+  HOMEOWNER = 'Homeowner',
 }
 
-@Entity('users')
+export enum Role {
+  USER = 'USER',
+  MODERATOR = 'MODERATOR',
+  ADMIN = 'ADMIN',
+  DEVELOPER = 'DEVELOPER',
+}
+
+@Entity('AccountInfo')
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -32,12 +40,30 @@ export class UserEntity {
   email: string
   @Column({select: false})
   password: string
+  @Column({type: 'enum', enum: Role, default: Role.USER})
+  role: Role
+}
+
+@Entity('Profiles')
+export class ProfileEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
   @Column()
   firstname: string
   @Column()
   lastname: string
-  @Column({type: 'enum', enum: Role, default: Role.USER})
-  role: Role
+  @Column({default: "No information provided"})
+  bio: string
+  @Column({type: 'enum', enum: AccountType, default: AccountType.TENANT})
+  accounttype: AccountType
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date
+  @Column({default: true})
+  livingStatus: boolean
+}
+
+export interface Profile{
+  id?: number;
+  firstname: string;
+  lastname: string;
 }

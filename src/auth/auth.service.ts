@@ -3,7 +3,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, map, Observable, switchMap } from 'rxjs';
 import { Repository } from 'typeorm';
-import { Login, UserEntity } from './user.interface';
+import { Login, Profile, ProfileEntity, UserEntity } from './user.interface';
 import { User } from './user.interface';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -13,21 +13,27 @@ export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(ProfileEntity)
+    private readonly profileRepository: Repository<Profile>,
     private jwtService: JwtService,
   ) {}
   hashPass(pass: string): Observable<string> {
     return from(bcrypt.hash(pass, 10));
   }
-  registerUser(user: User, req : any): Observable<User> {//user regristration
-    console.log(req);
-    const { email, password, firstname, lastname, role } = user;
+  registerUser(user: User): Observable<User> {//user regristration
+    const { email, password, firstname, lastname, role, accounttype, bio, livingStatus } = user;
     return this.hashPass(password).pipe(
       switchMap((hash: string) => {
+        this.profileRepository.save({
+          firstname,
+          lastname,
+          accounttype,
+          livingStatus,
+          bio,
+        })
         return this.userRepository.save({
           email,
           password: hash,
-          firstname,
-          lastname,
           role,
         });
       }),
@@ -40,7 +46,7 @@ export class AuthService {
   }
   validateCreds(login: Login): Observable<User> {
     return from(this.userRepository.findOne({
-      where: { email: login.email }, select: ['id', 'email', 'password', 'firstname', 'lastname', 'role'],
+      where: { email: login.email }, select: ['id', 'email', 'password', 'role'],
     })).pipe(
       switchMap((user: User) => {
         if (!user) throw new HttpException('ERROR: USER NOT FOUND!', HttpStatus.BAD_REQUEST);

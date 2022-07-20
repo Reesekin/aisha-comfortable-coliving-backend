@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
-import { UserEntity } from './user.interface';
+import { ProfileEntity, UserEntity } from './user.interface';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtGuard } from './guards/jwt.guard';
 import { JwtStrategy } from './guards/jwt.strategy';
 import { RolesGuard } from './guards/roles.guard';
-
+import { ProfileController } from 'src/profiledata/profile.controller';
+import { ProfileService } from 'src/profiledata/profile.service';
 @Module({
   imports: [
     JwtModule.registerAsync({
@@ -16,9 +17,9 @@ import { RolesGuard } from './guards/roles.guard';
         signOptions: { expiresIn: '30d' },
       }),
     }),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, ProfileEntity]),
   ],
-  providers: [AuthService, JwtGuard, JwtStrategy, RolesGuard],
-  controllers: [AuthController],
+  providers: [AuthService, ProfileService, JwtGuard, JwtStrategy, RolesGuard],
+  controllers: [AuthController, ProfileController],
 })
-export class UserModule {}
+export class AuthModule {}

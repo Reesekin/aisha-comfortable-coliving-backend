@@ -33,10 +33,8 @@ export const storePfp = {
     }),
     fileFilter: (req, file, cb) => {
         const fExt = file.originalname.split('.').pop();
-        const exception = new HttpException('ERROR: INVALID FILE EXTENSION', HttpStatus.BAD_REQUEST);
         if (!validExts.includes(fExt)){
-            throw exception;
-            cb(`File type not accepted: ${fExt}`, exception);
+            cb(`File type not accepted: ${fExt}`, false);
         }
         validMimes.includes(file.mimetype) ? cb(null, true) : cb('File mime type is not an image.', false);
     }

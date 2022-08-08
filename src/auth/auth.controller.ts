@@ -15,7 +15,7 @@ export class AuthController {
   registerUser(@Body() user: User): Observable<User> {
     return from(this.authService.registerUser(user));
   }
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.DEVELOPER)
   @UseGuards(JwtGuard, RolesGuard)
   @Get("fetch")
     getUsers(): Observable<User[]> {

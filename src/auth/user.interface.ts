@@ -9,7 +9,6 @@ export interface Login {
 export interface User { //Regristration data
   createdAt?: Date;
   id?: number;
-  username: string;
   password: string;
   email: string;
   role?: string;
@@ -18,11 +17,12 @@ export interface User { //Regristration data
   livingStatus?: boolean
   firstname: string;
   lastname: string;
+  pfp?: string;
 }
 
 export enum AccountType {
   TENANT = 'Tenant',
-  HOMEOWNER = 'Homeowner',
+  HOMEOWNER = 'HomeOwner',
 }
 
 export enum Role {
@@ -60,10 +60,13 @@ export class ProfileEntity {
   createdAt: Date
   @Column({default: true})
   livingStatus: boolean
+  @Column({nullable: true}) //Profile picture
+  pfp: string;
 }
 
 export interface Profile{
   id?: number;
   firstname: string;
   lastname: string;
+  pfp?: string;
 }

@@ -26,4 +26,42 @@ export class ProfileService {
       }),
     );
   }
+  findImage(id: number): Observable<string> {
+    return from(
+      this.profileRepository
+        .findOne({ where: { id } })
+        .then(async (profile) => {
+          return profile.pfp;
+        }),
+    );
+  }
+  deleteImage(id: number): void {
+    this.profileRepository
+      .findOne({ where: { id } })
+      .then(async (profile) => {
+        return profile.pfp;
+      })
+      .then(async (image) => {
+        if (image) {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          const fs = require('fs');
+          if (fs.existsSync(`./uploads/Pfp/${image}`)) {
+            fs.unlinkSync(`./uploads/Pfp/${image}`);
+          } else {
+            console.log('File not found');
+          }
+        }
+      });
+  }
+
+  uploadPfp(id: number, file: Express.Multer.File): Observable<string> {
+    this.deleteImage(id);
+    return from(
+      this.profileRepository
+        .update(id, { pfp: file.filename })
+        .then(async () => {
+          return file.filename;
+        }),
+    );
+  }
 }

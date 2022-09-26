@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from 'process';
 import { LoginModule } from './login/login.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { LoginModule } from './login/login.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    LoginModule
+    LoginModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],

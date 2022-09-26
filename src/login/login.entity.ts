@@ -17,7 +17,7 @@ export class Login {
   @Field()
   email: string;
 
-  @Column({select: false})
+  @Column()
   @Field()
   password: string;
 }

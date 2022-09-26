@@ -8,6 +8,7 @@ import { LoginService } from './login.service';
 @Module({
     imports: [TypeOrmModule.forFeature([Login])],
     providers: [LoginResolver, LoginService],
+    exports: [LoginService]
 })
 
 export class LoginModule {}

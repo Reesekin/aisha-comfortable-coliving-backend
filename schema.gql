@@ -9,16 +9,28 @@ type Login {
   password: String!
 }
 
+type LoginResp {
+  bearer_token: String!
+  user: Login!
+}
+
 type Query {
   viewLogins: [Login!]!
+  findEmail(email: String!): Login!
 }
 
 type Mutation {
   createLogin(registerInput: RegisterInput!): Login!
+  login(loginInput: LoginInput!): LoginResp!
 }
 
 input RegisterInput {
   username: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
   email: String!
   password: String!
 }

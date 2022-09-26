@@ -26,6 +26,12 @@ export class LoginService {
     return from(this.loginRepository.find());
   }
 
+  findOneUserName(username: string): Observable<Login> {
+    return from(this.loginRepository.findOne({where: {username: username}}));
+  }
+  findOneEmail(email: string): Observable<Login> {
+    return from(this.loginRepository.findOne({where: {email: email}}));
+  }
   register(login: RegisterInput): Observable<Login> {
     const {id, username, email, password} = this.loginRepository.create(login); //create new user login
     return this.hashPass(password).pipe( 

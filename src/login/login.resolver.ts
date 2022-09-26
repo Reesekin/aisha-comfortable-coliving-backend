@@ -16,6 +16,15 @@ export class LoginResolver {
         return from(this.loginService.findAll());
     }
 
+    //Find account by email
+    @Query(returns => Login)
+    findEmail(
+        @Args('email')
+        email: string
+        ) : Observable<Login> {
+        return this.loginService.findOneEmail(email);
+    }
+
     //Create login
     @Mutation(returns => Login)
     createLogin(

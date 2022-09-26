@@ -1,18 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Field, InputType } from '@nestjs/graphql';
-import { Length } from 'class-validator';
 
 @InputType()
-export class RegisterInput {
-
-  @Field()
-  @Length(3, 20)
-  username: string;
-
+export class LoginInput {
   @Field()
   email: string;
 
   @Field()
-  @Length(12, 40)
   password: string;
 }

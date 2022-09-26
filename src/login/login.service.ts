@@ -27,22 +27,6 @@ export class LoginService {
   }
 
   register(login: RegisterInput): Observable<Login> {
-    //Check if username or email already exists
-    const emailExists = this.loginRepository.findOne({where: {username: login.username}}).then((user) => {
-      if (user) {
-        return true;
-      }
-    });
-    const usernExists = this.loginRepository.findOne({where: {username: login.email}}).then((user) => {
-      if (user) {
-        return true;
-      }
-    });
-
-    if (emailExists || usernExists) {
-      return null;
-    }
-
     const {id, username, email, password} = this.loginRepository.create(login); //create new user login
     return this.hashPass(password).pipe( 
       switchMap((hash: string) => {

@@ -18,6 +18,7 @@ export class Login {
   email: string;
 
   @Column()
-  @Field()
+  @Field({nullable: true})
   password: string;
+
 }

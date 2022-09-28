@@ -3,8 +3,13 @@
 # ------------------------------------------------------
 
 type Login {
+  email: String!
   id: Int!
+  password: String
   username: String!
+}
+
+input LoginInput {
   email: String!
   password: String!
 }
@@ -14,23 +19,19 @@ type LoginResp {
   user: Login!
 }
 
-type Query {
-  viewLogins: [Login!]!
-  findEmail(email: String!): Login!
+type Mutation {
+  compare(loginInput: LoginInput!): Login
+  createLogin(registerInput: RegisterInput!): Login!
+  login(loginInput: LoginInput!): LoginResp
 }
 
-type Mutation {
-  createLogin(registerInput: RegisterInput!): Login!
-  login(loginInput: LoginInput!): LoginResp!
+type Query {
+  findEmail(email: String!): Login
+  viewLogins: [Login!]
 }
 
 input RegisterInput {
+  email: String!
+  password: String!
   username: String!
-  email: String!
-  password: String!
-}
-
-input LoginInput {
-  email: String!
-  password: String!
 }

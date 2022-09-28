@@ -22,17 +22,17 @@ export class LoginService {
     return login;
   }
 
-  findAll(): Observable<Login[]> {
+  findAll(): Observable<Login[] | undefined> {
     return from(this.loginRepository.find());
   }
 
-  findOneUserName(username: string): Observable<Login> {
+  findOneUserName(username: string): Observable<Login | undefined> {
     return from(this.loginRepository.findOne({where: {username: username}}));
   }
-  findOneEmail(email: string): Observable<Login> {
+  findOneEmail(email: string): Observable<Login | undefined> {
     return from(this.loginRepository.findOne({where: {email: email}}));
   }
-  register(login: RegisterInput): Observable<Login> {
+  register(login: RegisterInput): Observable<Login | undefined> {
     const {id, username, email, password} = this.loginRepository.create(login); //create new user login
     return this.hashPass(password).pipe( 
       switchMap((hash: string) => {

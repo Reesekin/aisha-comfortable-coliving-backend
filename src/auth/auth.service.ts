@@ -13,7 +13,6 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
   validateUser(email: string, pass: string): Observable<any> {
-    console.log(`Running validation check on ${email}`);
     return this.loginService.findOneEmail(email).pipe(
       switchMap((login: any) => {
         if (login) {

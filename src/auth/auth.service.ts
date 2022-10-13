@@ -5,6 +5,7 @@ import { LoginService } from 'src/login/login.service';
 import * as bcrypt from 'bcrypt';
 import { LoginInput } from 'src/login/dto/login.input';
 import { JwtService } from '@nestjs/jwt';
+import { RoleInput } from 'src/login/dto/role.input';
 
 @Injectable()
 export class AuthService {
@@ -35,11 +36,25 @@ export class AuthService {
     );
     return {
       bearer_token: this.jwtService.sign({
-        sub: user.id,
+        id: user.id,
+        role: user.role,
         username: user.username,
         email: user.email,
       }),
       user: user,
     };
+  }
+
+  async setRole(roleInput: RoleInput) {
+    const user = await firstValueFrom(
+      this.loginService.findOneEmail(roleInput.email),
+    );
+    if (user) {
+      user.role = roleInput.role;
+      const saved = await firstValueFrom(this.loginService.save(user));
+      console.log(saved);
+      return await saved;
+    }
+    throw new BadRequestException();
   }
 }

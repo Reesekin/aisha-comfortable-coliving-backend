@@ -5,6 +5,8 @@ import { Login } from 'src/login/login.entity';
 import { GqlAuthGuard } from './guards/auth.guard';
 import { AuthService } from './auth.service';
 import { LoginResp } from './dto/loginResp';
+import { RoleResp } from './dto/roleResp';
+import { RoleInput } from 'src/login/dto/role.input';
 @Resolver()
 export class AuthResolver {
   constructor(private authService: AuthService) {}
@@ -18,5 +20,10 @@ export class AuthResolver {
   @UseGuards(GqlAuthGuard)
   login(@Args('loginInput') loginInput: LoginInput) {
     return this.authService.login(loginInput);
+  }
+
+  @Mutation(() => Login, { nullable: true })
+  setRole(@Args('roleInput') roleInput: RoleInput) {
+    return this.authService.setRole(roleInput);
   }
 }

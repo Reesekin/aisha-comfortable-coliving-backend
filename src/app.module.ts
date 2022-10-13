@@ -7,6 +7,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
+import { UserResolver } from './user/user.resolver';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -26,9 +28,10 @@ import { join } from 'path';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    AuthModule
+    AuthModule,
+    UserModule
   ],
   controllers: [],
-  providers: [],
+  providers: [UserResolver],
 })
 export class AppModule {}

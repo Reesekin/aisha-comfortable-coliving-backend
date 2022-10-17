@@ -41,6 +41,7 @@
     "class-validator": "^0.13.2",
     "file-type": "^17.1.6",
     "graphql": "^16.6.0",
+    "mysql2": "^2.3.3",
     "nestjs": "^0.0.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",

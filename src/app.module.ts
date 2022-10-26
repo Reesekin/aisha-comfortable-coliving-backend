@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
 import { UserResolver } from './user/user.resolver';
 import { UserModule } from './user/user.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { UserModule } from './user/user.module';
       synchronize: true,
     }),
     AuthModule,
-    UserModule
+    UserModule,
+    ServicesModule
   ],
   controllers: [],
   providers: [UserResolver],

@@ -1,11 +1,11 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class SideMenu {
-  @Column()
-  @Field((type) => Int)
+  @PrimaryColumn()
+  @Field(() => Int)
   userId: number;
 
   @Column()

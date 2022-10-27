@@ -23,8 +23,34 @@ type LoginResp {
 type Mutation {
   compare(loginInput: LoginInput!): Login
   createLogin(registerInput: RegisterInput!): Login!
+  createProfile(ProfileInput: ProfileInput!): Profile!
+  createSideMenu(SideMenuInput: SideMenuInput!): SideMenu!
   login(loginInput: LoginInput!): LoginResp
   setRole(roleInput: RoleInput!): Login
+  updateProfile(UpdateProfileInput: UpdateProfileInput!): Profile!
+  updateSideMenu(UpdateSideMenuInput: UpdateSideMenuInput!): SideMenu!
+}
+
+type Profile {
+  ageRange: String!
+  dob: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  location: String!
+  occupation: String!
+  userId: Int!
+}
+
+input ProfileInput {
+  ageRange: String!
+  dob: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  location: String!
+  occupation: String!
+  userId: Float!
 }
 
 type Query {
@@ -42,4 +68,29 @@ input RegisterInput {
 input RoleInput {
   email: String!
   role: Int!
+}
+
+type SideMenu {
+  firstName: String!
+  profilePhoto: String!
+  userId: Int!
+}
+
+input SideMenuInput {
+  firstName: String!
+  profilePhoto: String!
+  userId: Float!
+}
+
+input UpdateProfileInput {
+  ageRange: String!
+  email: String!
+  location: String!
+  occupation: String!
+  userId: Float!
+}
+
+input UpdateSideMenuInput {
+  profilePhoto: String!
+  userId: Float!
 }

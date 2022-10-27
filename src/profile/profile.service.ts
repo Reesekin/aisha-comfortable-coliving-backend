@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
-import { profile } from 'console';
 import { Repository } from 'typeorm';
+import { ProfileInput } from './dto/profile.input';
+import { UpdateProfileInput } from './dto/updateProfile.input';
 import { Profile } from './profile.entity';
 
 @Injectable()
@@ -11,25 +12,26 @@ export class ProfileService {
     @InjectRepository(Profile) private profileRepository: Repository<Profile>,
   ) {}
 
-  async updateProfile(
-    @Args()
-    args: {
-      userId: number;
-      email: string;
-      location: string;
-      occupation: string;
-      ageRange: string;
-    },
-  ): Promise<Profile> {
-    const { userId, email, location, occupation, ageRange } = args;
-    const profile = this.profileRepository.findOne({
-      where: { userId: userId },
-    });
+  //find profile by user id
+  async findByUserId(userId: number): Promise<Profile> {
+    return this.profileRepository.findOne({ where: { userId: userId } });
+  }
 
-    (await profile).email = email;
-    (await profile).location = location;
-    (await profile).occupation = occupation;
-    (await profile).ageRange = ageRange;
-    return profile;
+  //update profile content
+  async update(
+    UpdateProfileInput: UpdateProfileInput,
+    Profile: Profile,
+  ): Promise<Profile> {
+    (await Profile).email = UpdateProfileInput.email;
+    (await Profile).location = UpdateProfileInput.location;
+    (await Profile).occupation = UpdateProfileInput.occupation;
+    (await Profile).ageRange = UpdateProfileInput.ageRange;
+    return Profile;
+  }
+
+  //create new profile
+  newProfile(ProfileInput: ProfileInput): Promise<Profile> {
+    const newProfile = this.profileRepository.create(ProfileInput);
+    return this.profileRepository.save(newProfile);
   }
 }

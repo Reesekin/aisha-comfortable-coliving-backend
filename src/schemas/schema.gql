@@ -19,15 +19,39 @@ type LoginResp {
   user: Login!
 }
 
+type MeetingInfo {
+  UserJoinMeeting: String!
+  UserMadeMeeting: String!
+  day: Int!
+  hour: Int!
+  id: Int!
+  minutes: Int!
+  month: Int!
+  year: Int!
+}
+
+input MeetingInput {
+  UserJoinMeeting: String!
+  UserMadeMeeting: String!
+  day: Int!
+  hour: Int!
+  id: Int!
+  minutes: Int!
+  month: Int!
+  year: Int!
+}
+
 type Mutation {
   compare(loginInput: LoginInput!): Login
   createLogin(registerInput: RegisterInput!): Login!
+  createMeeting(meetingInput: MeetingInput!): MeetingInfo!
   login(loginInput: LoginInput!): LoginResp
 }
 
 type Query {
   findEmail(email: String!): Login
-  viewLogins: [Login!]
+  findMonth(month: Float!): MeetingInfo!
+  viewLogins: [MeetingInfo!]
 }
 
 input RegisterInput {

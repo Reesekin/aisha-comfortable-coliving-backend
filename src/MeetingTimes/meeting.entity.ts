@@ -9,24 +9,31 @@ export class MeetingInfo {
   @Field(() => Int)
   id: number;
 
-  @Column({unique: true})
+  @Column()
   @Field(() => Int)
   year: number;
 
-  @Column({unique: true})
+  @Column()
   @Field(() => Int)
   month: number;
 
-  @Column({unique: true})
+  @Column()
   @Field(() => Int)
   day: number;
 
-  @Column({unique: true})
+  @Column()
   @Field(() => Int)
   hour: number;
 
-  @Column({unique: true})
+  @Column()
   @Field(() => Int)
   minutes: number;
 
+  @Column()
+  @Field()
+  UserMadeMeeting: string;
+
+  @Column()
+  @Field()
+  UserJoinMeeting: string;
 }

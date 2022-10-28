@@ -7,6 +7,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
+import { MeetingModule } from './MeetingTimes/meeting.module';
+import { MeetingInfo} from './MeetingTimes/meeting.entity';
+import { Type } from 'class-transformer';
 
 @Module({
   imports: [
@@ -26,7 +29,9 @@ import { join } from 'path';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    AuthModule
+    AuthModule,
+    TypeOrmModule.forFeature([MeetingModule]),
+    MeetingModule,
   ],
   controllers: [],
   providers: [],

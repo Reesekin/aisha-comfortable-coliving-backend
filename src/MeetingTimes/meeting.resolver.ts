@@ -14,14 +14,14 @@ export class MeetingInfoResolver {
     constructor(private meetingservice: MeetingService) {}
     
     // View all meetings of all users: ADMIN & DEBUGGING PURPOSES ONLY
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Query(returns => [MeetingInfo], { nullable: true })
     viewLogins(): Observable<MeetingInfo[]> {
         return from(this.meetingservice.findAll());
     }
 
     //Find meeting by month
-    @Query(returns => MeetingInfo, {nullable: true})
+    @Query(returns => MeetingInfo, {nullable: false})
     findMonth(
         @Args('month')
         month: number
@@ -31,7 +31,7 @@ export class MeetingInfoResolver {
 
     //Creates MeetingInfo
     @Mutation(returns => MeetingInfo)
-    @UseGuards(ExistsGuard)
+    //@UseGuards(ExistsGuard)
     createMeeting(
         @Args('meetingInput')
         meeting: MeetingInput

@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable, switchMap} from 'rxjs';
+import { from, map, Observable, switchMap } from 'rxjs';
 import { Repository } from 'typeorm';
 import { MeetingInput } from './Entry/meeting.input';
 import { MeetingInfo } from './meeting.entity';
+
 
 @Injectable()
 export class MeetingService{
@@ -33,21 +34,11 @@ export class MeetingService{
         return from(this.meetingRepository.findOne({where: {day: day}}));
     }
 
-    createMeeting(meeting: MeetingInput): Observable<MeetingInput | undefined> {
-        const {id, year, month, day, hour, minutes} = this.meetingRepository.create(meeting);
-        switchMap((hash: string) => 
-        {
-            return this.meetingRepository.save({
-            id,
-            year,
-            month,
-            day,
-            hour,
-            minutes,
-            });
-    })
-    return
-}
+    createMeeting(meeting: MeetingInput): Observable<MeetingInput> {
+    const meetingObj = this.meetingRepository.create(meeting);
+    //save meeting object
+        return from(this.meetingRepository.save(meetingObj));
+    }
 
    /* updateMeeting(meeting: MeetingInfo): Observable<MeetingInfo | undefined> {
         return from(this.meetingRepository.update(meeting));

@@ -1,23 +1,29 @@
 /* eslint-disable prettier/prettier */
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, Int, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class MeetingInput {
-    @Field()
+    @Field(() => Int)
     id: number;
 
-    @Field()
+    @Field(() => Int)
     year: number;
 
-    @Field()
+    @Field(() => Int)
     month: number;
 
-    @Field()
+    @Field(() => Int)
     day: number;
 
-    @Field()
+    @Field(() => Int)
     hour: number;
 
-    @Field()
+    @Field(() => Int)
     minutes: number;
+
+    @Field()
+    UserMadeMeeting: string;
+
+    @Field()
+    UserJoinMeeting: string;
 }

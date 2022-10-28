@@ -12,4 +12,4 @@ import { MeetingService } from './meeting.service';
     exports: [MeetingService]
 })
 
-export class MeetingInfoModule{}
+export class MeetingModule{}

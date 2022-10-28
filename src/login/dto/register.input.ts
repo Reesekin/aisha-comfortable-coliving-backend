@@ -15,4 +15,7 @@ export class RegisterInput {
   @Field()
   @Length(12, 40)
   password: string;
+
+  @Field({nullable: true, defaultValue: 1})
+  role?: number;
 }

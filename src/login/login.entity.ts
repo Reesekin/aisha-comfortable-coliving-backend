@@ -9,6 +9,10 @@ export class Login {
   @Field(() => Int)
   id: number;
 
+  @Column()
+  @Field(() => Int, {nullable: true})
+  role?: number;
+
   @Column({unique: true})
   @Field()
   username: string;
@@ -21,4 +25,10 @@ export class Login {
   @Field({nullable: true})
   password: string;
 
+  // @Column({nullable: true})
+  // @Field({nullable: true})
+  // @OneToOne(() => User, {
+  //   onDelete: 'CASCADE',
+  // })
+  // private user?: User;
 }

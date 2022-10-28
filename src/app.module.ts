@@ -7,9 +7,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
-import { MeetingModule } from './MeetingTimes/meeting.module';
-import { MeetingInfo} from './MeetingTimes/meeting.entity';
-import { Type } from 'class-transformer';
+import { UserResolver } from './user/user.resolver';
+import { UserModule } from './user/user.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -30,10 +30,10 @@ import { Type } from 'class-transformer';
       synchronize: true,
     }),
     AuthModule,
-    TypeOrmModule.forFeature([MeetingModule]),
-    MeetingModule,
+    UserModule,
+    ServicesModule
   ],
   controllers: [],
-  providers: [],
+  providers: [UserResolver],
 })
 export class AppModule {}

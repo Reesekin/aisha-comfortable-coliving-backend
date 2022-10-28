@@ -6,6 +6,7 @@ type Login {
   email: String!
   id: Int!
   password: String
+  role: Int
   username: String!
 }
 
@@ -46,6 +47,7 @@ type Mutation {
   createLogin(registerInput: RegisterInput!): Login!
   createMeeting(meetingInput: MeetingInput!): MeetingInfo!
   login(loginInput: LoginInput!): LoginResp
+  setRole(roleInput: RoleInput!): Login
 }
 
 type Query {
@@ -57,5 +59,11 @@ type Query {
 input RegisterInput {
   email: String!
   password: String!
+  role: Float = 1
   username: String!
+}
+
+input RoleInput {
+  email: String!
+  role: Int!
 }

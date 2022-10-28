@@ -26,6 +26,10 @@ export class LoginService {
     return from(this.loginRepository.find());
   }
 
+  save(login: Login): Observable<Login | undefined> {
+    return from(this.loginRepository.save(login));
+  }
+
   findOneUserName(username: string): Observable<Login | undefined> {
     return from(this.loginRepository.findOne({where: {username: username}}));
   }
@@ -33,13 +37,14 @@ export class LoginService {
     return from(this.loginRepository.findOne({where: {email: email}}));
   }
   register(login: RegisterInput): Observable<Login | undefined> {
-    const {id, username, email, password} = this.loginRepository.create(login); //create new user login
+    const {id, username, email, password, role} = this.loginRepository.create(login); //create new user login
     return this.hashPass(password).pipe( 
       switchMap((hash: string) => {
       return this.loginRepository.save({
         id,
         email,
         username,
+        role,
         password: hash //Hashify password
       });
     }),

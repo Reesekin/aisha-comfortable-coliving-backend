@@ -18,5 +18,18 @@ export class AccountService {
         return this.accountRepository.save(newAccount);
     }
 
+    findAccountByFirstName(firstName: string): Promise<Account>
+    {
+        return this.accountRepository.findOne({where: {firstName: firstName}});
+    }
 
+    findAccountByLastName(lastName: string): Promise<Account>
+    {
+        return this.accountRepository.findOne({where: {lastName: lastName}});
+    }
+
+    findAccountByEmail(email: string): Promise<Account>
+    {
+        return this.accountRepository.findOne({where: {email: email}});
+    }
 }

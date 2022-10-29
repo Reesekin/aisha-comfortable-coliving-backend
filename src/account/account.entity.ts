@@ -1,12 +1,12 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, ObjectType, registerEnumType, Int } from '@nestjs/graphql'
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 
 export enum AccountType {
 
-    TENANT,
-    HOMEOWNER,
-    PROPERTYOWNER,
+    TENANT = "Tenant",
+    HOMEOWNER = "Homeowner",
+    PROPERTYOWNER = "Property Owner",
 }
 
 registerEnumType(AccountType, {
@@ -19,7 +19,11 @@ registerEnumType(AccountType, {
 export class Account {
 
     @PrimaryColumn()
-    @Field(type => AccountType)
+    @Field(type => Int)
+    accountID: number;
+
+    @Column()
+    @Field(() => AccountType)
     accountType: AccountType;
 
     @Column()
@@ -28,7 +32,7 @@ export class Account {
 
     @Column()
     @Field()
-    lastname: string;
+    lastName: string;
 
     @Column()
     @Field()

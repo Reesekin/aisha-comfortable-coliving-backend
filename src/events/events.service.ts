@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Event } from './events.entity'
 import { CreateEventInput } from './dto/create-event.input'
+import { Observable, from } from 'rxjs';
+import { ProvidePlugin } from 'webpack';
+import { DeleteEventInput } from './dto/delete-event.input';
 
 @Injectable()
 export class EventsService {
@@ -10,17 +13,22 @@ export class EventsService {
     constructor(@InjectRepository(Event) private readonly eventRespository: Repository<Event>) {}
 
     //create an event
-    createEvent(createEventInput:CreateEventInput): Promise<Event> {
+     createEvent(createEventInput:CreateEventInput): Promise<Event> {
 
         const newEvent = this.eventRespository.create(createEventInput);
 
         return this.eventRespository.save(newEvent);
     }
 
-    //delete an event
-    deleteEvent(eventName:string): void {
-        this.eventRespository.delete(eventName);
+  /*  //delete an event
+    deleteEvent(eventID: number): Promise<DeleteResult> {
+        
+        //const deleteEvent = this.eventRespository.find({where:{eventID: eventID}});
+
+       return this.eventRespository.delete(eventID);
+        
     }
+*/
 
     //search for an event 
     findEvent(eventName: string): Promise<Event> {

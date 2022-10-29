@@ -2,6 +2,55 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Account {
+  accountID: Int!
+  accountType: AccountType!
+  ageRange: String!
+  birthDate: String!
+  description: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  location: String!
+}
+
+"""The three account types the user can create."""
+enum AccountType {
+  HOMEOWNER
+  PROPERTYOWNER
+  TENANT
+}
+
+input CreateAccountInput {
+  accountID: Int!
+  accountType: AccountType!
+  ageRange: String!
+  birthDate: String!
+  description: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  location: String!
+}
+
+input CreateEventInput {
+  eventDate: String!
+  eventDescription: String!
+  eventID: Int!
+  eventLocation: String!
+  eventName: String!
+  eventTime: String!
+}
+
+type Event {
+  eventDate: String!
+  eventDescription: String!
+  eventID: Int!
+  eventLocation: String!
+  eventName: String!
+  eventTime: String!
+}
+
 type Login {
   email: String!
   id: Int!
@@ -22,13 +71,20 @@ type LoginResp {
 
 type Mutation {
   compare(loginInput: LoginInput!): Login
+  createAccount(createAccountInput: CreateAccountInput!): Account!
+  createEvent(createEventInput: CreateEventInput!): Event!
   createLogin(registerInput: RegisterInput!): Login!
   login(loginInput: LoginInput!): LoginResp
   setRole(roleInput: RoleInput!): Login
 }
 
 type Query {
+  events: [Event!]!
   findEmail(email: String!): Login
+  getAccountByEmail(email: String!): Account!
+  getAccountByFirstName(firstName: String!): Account!
+  getAccountByLastName(lastName: String!): Account!
+  getEvent(eventName: String!): Event!
   viewLogins: [Login!]
 }
 

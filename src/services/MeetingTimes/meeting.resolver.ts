@@ -13,13 +13,6 @@ import { MeetingInput } from './Entry/meeting.input';
 export class MeetingInfoResolver {
     constructor(private meetingservice: MeetingService) {}
     
-    // View all meetings of all users: ADMIN & DEBUGGING PURPOSES ONLY
-    //@UseGuards(JwtAuthGuard)
-    @Query(returns => [MeetingInfo], { nullable: true })
-    viewLogins(): Observable<MeetingInfo[]> {
-        return from(this.meetingservice.findAll());
-    }
-
     //Find meeting by month
     @Query(returns => MeetingInfo, {nullable: false})
     findMonth(

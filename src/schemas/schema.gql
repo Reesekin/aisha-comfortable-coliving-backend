@@ -53,13 +53,13 @@ type Mutation {
 type Query {
   findEmail(email: String!): Login
   findMonth(month: Float!): MeetingInfo!
-  viewLogins: [MeetingInfo!]
+  viewLogins: [Login!]
 }
 
 input RegisterInput {
   email: String!
   password: String!
-  role: Float = 1
+  role: Int = 1
   username: String!
 }
 

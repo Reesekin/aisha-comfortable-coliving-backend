@@ -20,19 +20,23 @@ export class EventsService {
         return this.eventRespository.save(newEvent);
     }
 
-  /*  //delete an event
-    deleteEvent(eventID: number): Promise<DeleteResult> {
-        
-        //const deleteEvent = this.eventRespository.find({where:{eventID: eventID}});
-
-       return this.eventRespository.delete(eventID);
-        
+    findEventByID(eventID: number):Promise<Event> {
+        return this.eventRespository.findOne({where: {eventID: eventID}});
     }
-*/
-
     //search for an event 
     findEvent(eventName: string): Promise<Event> {
         return this.eventRespository.findOne({where: {eventName: eventName}});
+    }
+
+    async updateEvent (updateEvent:CreateEventInput, event:Event): Promise<Event> {
+
+        (await event).eventName = updateEvent.eventName;
+        (await event).eventDate = updateEvent.eventDate;
+        (await event).eventTime = updateEvent.eventTime;
+        (await event).eventLocation = updateEvent.eventLocation;
+        (await event).eventDescription = updateEvent.eventDescription;
+
+        return this.eventRespository.save(event);
     }
 
     //return all events

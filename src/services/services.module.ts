@@ -6,6 +6,8 @@ import { AccountModule } from './account/account.module';
 import { EventsModule } from './events/events.module';
 import { MeetingModule } from './MeetingTimes/meeting.module';
 import { SideMenuModule } from './side-menu/side-menu.module';
+import { ListingDetailsModule } from './listingDetails/listing-details/listing-details.module';
+import { PropertiesModule } from './properties/properties/properties.module';
 
 @Module({
   imports: [
@@ -15,6 +17,9 @@ import { SideMenuModule } from './side-menu/side-menu.module';
     AccountModule,
     EventsModule,
     SideMenuModule,
+    ListingDetailsModule,
+    PropertiesModule
+
   ],
   providers: [],
   exports: [],

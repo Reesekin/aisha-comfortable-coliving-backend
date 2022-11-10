@@ -97,34 +97,10 @@ type Mutation {
   createEvent(createEventInput: CreateEventInput!): Event!
   createLogin(registerInput: RegisterInput!): Login!
   createMeeting(meetingInput: MeetingInput!): MeetingInfo!
-  createProfile(ProfileInput: ProfileInput!): Profile!
   createSideMenu(SideMenuInput: SideMenuInput!): SideMenu!
   login(loginInput: LoginInput!): LoginResp
   setRole(roleInput: RoleInput!): Login
-  updateProfile(UpdateProfileInput: UpdateProfileInput!): Profile!
   updateSideMenu(UpdateSideMenuInput: UpdateSideMenuInput!): SideMenu!
-}
-
-type Profile {
-  ageRange: String!
-  dob: String
-  email: String!
-  firstName: String!
-  lastName: String!
-  location: String!
-  occupation: String!
-  userId: Int!
-}
-
-input ProfileInput {
-  ageRange: String!
-  dob: String
-  email: String!
-  firstName: String!
-  lastName: String!
-  location: String!
-  occupation: String!
-  userId: Float!
 }
 
 type Query {
@@ -159,14 +135,6 @@ type SideMenu {
 input SideMenuInput {
   firstName: String!
   profilePhoto: String!
-  userId: Float!
-}
-
-input UpdateProfileInput {
-  ageRange: String!
-  email: String!
-  location: String!
-  occupation: String!
   userId: Float!
 }
 

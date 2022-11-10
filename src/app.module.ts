@@ -7,15 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
-import { UserResolver } from './user/user.resolver';
-import { EventsResolver } from './events/events.resolver'
-import { AccountResolver } from './account/account.resolver';
-import { UserModule } from './user/user.module';
 import { ServicesModule } from './services/services.module';
-import { EventsModule } from './events/events.module';
-import { AccountModule } from './account/account.module';
-import { ProfileModule } from './profile/profile.module';
-import { SideMenuModule } from './side-menu/side-menu.module';
 
 @Module({
   imports: [
@@ -36,14 +28,9 @@ import { SideMenuModule } from './side-menu/side-menu.module';
       synchronize: true,
     }),
     AuthModule,
-    UserModule,
     ServicesModule,
-    AccountModule,
-    EventsModule,
-    ProfileModule,
-    SideMenuModule
   ],
   controllers: [],
-  providers: [UserResolver],
+  providers: [],
 })
 export class AppModule {}

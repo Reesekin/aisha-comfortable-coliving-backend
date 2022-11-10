@@ -8,8 +8,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
 import { UserResolver } from './user/user.resolver';
+import { EventsResolver } from './events/events.resolver'
+import { AccountResolver } from './account/account.resolver';
 import { UserModule } from './user/user.module';
 import { ServicesModule } from './services/services.module';
+import { EventsModule } from './events/events.module';
+import { AccountModule } from './account/account.module';
 
 @Module({
   imports: [
@@ -31,7 +35,9 @@ import { ServicesModule } from './services/services.module';
     }),
     AuthModule,
     UserModule,
-    ServicesModule
+    ServicesModule,
+    AccountModule,
+    EventsModule,
   ],
   controllers: [],
   providers: [UserResolver],

@@ -14,6 +14,8 @@ import { UserModule } from './user/user.module';
 import { ServicesModule } from './services/services.module';
 import { EventsModule } from './events/events.module';
 import { AccountModule } from './account/account.module';
+import { ProfileModule } from './profile/profile.module';
+import { SideMenuModule } from './side-menu/side-menu.module';
 
 @Module({
   imports: [
@@ -38,6 +40,8 @@ import { AccountModule } from './account/account.module';
     ServicesModule,
     AccountModule,
     EventsModule,
+    ProfileModule,
+    SideMenuModule
   ],
   controllers: [],
   providers: [UserResolver],

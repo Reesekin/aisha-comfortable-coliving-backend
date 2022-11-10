@@ -845,7 +845,7 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
-"@nestjs/apollo@^10.1.0":
+"@nestjs/apollo@^10.1.4":
   version "10.1.4"
   resolved "https://registry.yarnpkg.com/@nestjs/apollo/-/apollo-10.1.4.tgz#f2f5451ce03975e8ad79aeec447a56ccc6e37920"
   integrity sha512-zHaSxYRvDDZktdP3ydtBQEZPt7VFEYawNIb88FADcTf8UMOLFarEle9tfU3xg7jJUX2gXVwwHLftHfJ8YAbq1w==

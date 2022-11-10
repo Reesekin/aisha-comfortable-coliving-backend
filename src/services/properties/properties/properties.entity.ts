@@ -1,31 +1,28 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql'
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('Event')
+@Entity('Properties')
 @ObjectType()
-export class Event {
+export class Properties {
     @PrimaryGeneratedColumn()
     @Field(() => Int)
-    eventID: number;
+    propertyID: number;
 
     @Column()
     @Field()
-    eventName: string;
+    propertyName: string;
 
     @Column()
     @Field()
-    eventDate: string;
+    propertyLocation: string;
     
     @Column()
     @Field()
-    eventTime: string;
+    availability: string;
     
     @Column()
     @Field()
-    eventLocation: string;
-    
-    @Column()
-    @Field()
-    eventDescription: string;
+    price: string;
+
 
 }

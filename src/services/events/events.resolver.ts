@@ -4,35 +4,37 @@ import { Observable } from 'rxjs';
 import { DeleteResult } from 'typeorm';
 import { CreateEventInput } from './dto/create-event.input';
 import { DeleteEventInput } from './dto/delete-event.input';
-import { Event } from './events.entity';
+import { Event } from './events.entity'
 import { EventsService } from './events.service';
 
-@Resolver((of) => Event)
+@Resolver(of => Event)
 export class EventsResolver {
-  constructor(private eventsService: EventsService) {}
 
-  @Query((returns) => Event)
-  getEvent(
-    @Args('eventName', { type: () => String }) eventName: string,
-  ): Promise<Event> {
-    return this.eventsService.findEvent(eventName);
-  }
-  @Query((returns) => [Event])
-  events(): Promise<Event[]> {
-    return this.eventsService.findAll();
-  }
+    constructor(private eventsService:EventsService) {}
 
-  /*
-    @Mutation(returns => Boolean)
-    deleteEvents(@Args('deleteEventInput') eventID: number):Promise<DeleteResult> {
+    @Query(returns => Event)
+    getEvent(@Args('eventName', {type: () => String}) eventName: string): Promise<Event> {
 
-        return this.eventsService.deleteEvent(eventID);    
-    }*/
+        return this.eventsService.findEvent(eventName);
+    }
+    @Query(returns => [Event])
+    events(): Promise<Event[]> {
 
-  @Mutation((returns) => Event)
-  createEvent(
-    @Args('createEventInput') createEventInput: CreateEventInput,
-  ): Promise<Event> {
-    return this.eventsService.createEvent(createEventInput);
-  }
+        return this.eventsService.findAll();
+    }
+   
+
+    @Mutation(returns => Event)
+    createEvent(@Args('createEventInput') createEventInput:CreateEventInput): Promise<Event> {
+
+        return (this.eventsService.createEvent(createEventInput));
+    }
+
+    @Mutation(returns => Event)
+    async updateEvent(@Args ('updateEvent') updateEvent:CreateEventInput,): Promise<Event> {
+
+        const event = this.eventsService.findEventByID(updateEvent.eventID);
+        return this.eventsService.updateEvent(updateEvent, await event);
+    }
+
 }

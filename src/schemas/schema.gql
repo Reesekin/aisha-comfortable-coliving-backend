@@ -42,6 +42,39 @@ input CreateEventInput {
   eventTime: String!
 }
 
+input CreateListingInput {
+  airConditioning: DecisionType!
+  bedrooms: Int!
+  dateAvailable: String!
+  furnished: DecisionType!
+  homeownerLivingIn: DecisionType!
+  listingDescription: String!
+  listingID: Int!
+  listingLocation: String!
+  listingSqFootage: String!
+  listingTitle: String!
+  monthlyCost: Int!
+  numOfHousemates: Int!
+  parkingSlots: Int!
+  pets: DecisionType!
+  smoking: DecisionType!
+  wifi: DecisionType!
+}
+
+input CreatePropertyInput {
+  availability: String!
+  price: String!
+  propertyID: Int!
+  propertyLocation: String!
+  propertyName: String!
+}
+
+"""For the Yes or No questions"""
+enum DecisionType {
+  NO
+  YES
+}
+
 type Event {
   eventDate: String!
   eventDescription: String!
@@ -49,6 +82,25 @@ type Event {
   eventLocation: String!
   eventName: String!
   eventTime: String!
+}
+
+type ListingDetails {
+  airConditioning: DecisionType!
+  bedrooms: Int!
+  dateAvailable: String!
+  furnished: DecisionType!
+  homeownerLivingIn: DecisionType!
+  listingDescription: String!
+  listingID: Int!
+  listingLocation: String!
+  listingSqFootage: String!
+  listingTitle: String!
+  monthlyCost: Int!
+  numOfHousemates: Int!
+  parkingSlots: Int!
+  pets: DecisionType!
+  smoking: DecisionType!
+  wifi: DecisionType!
 }
 
 type Login {
@@ -95,12 +147,25 @@ type Mutation {
   compare(loginInput: LoginInput!): Login
   createAccount(createAccountInput: CreateAccountInput!): Account!
   createEvent(createEventInput: CreateEventInput!): Event!
+  createListing(createListingInput: CreateListingInput!): ListingDetails!
   createLogin(registerInput: RegisterInput!): Login!
   createMeeting(meetingInput: MeetingInput!): MeetingInfo!
+  createProperty(createPropertyInput: CreatePropertyInput!): Properties!
   createSideMenu(SideMenuInput: SideMenuInput!): SideMenu!
   login(loginInput: LoginInput!): LoginResp
   setRole(roleInput: RoleInput!): Login
+  updateEvent(updateEvent: CreateEventInput!): Event!
+  updateListing(updateListing: CreateListingInput!): ListingDetails!
+  updateProperty(updateProperty: CreatePropertyInput!): Properties!
   updateSideMenu(UpdateSideMenuInput: UpdateSideMenuInput!): SideMenu!
+}
+
+type Properties {
+  availability: String!
+  price: String!
+  propertyID: Int!
+  propertyLocation: String!
+  propertyName: String!
 }
 
 type Query {
@@ -111,6 +176,10 @@ type Query {
   getAccountByFirstName(firstName: String!): Account!
   getAccountByLastName(lastName: String!): Account!
   getEvent(eventName: String!): Event!
+  getListing(listingName: String!): ListingDetails!
+  getProperty(propertiesName: String!): Properties!
+  listings: [ListingDetails!]!
+  properties: [Properties!]!
   viewLogins: [Login!]
 }
 

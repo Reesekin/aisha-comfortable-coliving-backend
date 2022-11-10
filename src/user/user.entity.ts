@@ -10,6 +10,10 @@ export class User {
   @Field(() => Int)
   id: number;
 
+  /* 
+  * AccountType should be here
+  */
+
   @Column()
   @Field(() => String)
   firstName: string;

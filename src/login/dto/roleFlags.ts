@@ -1,7 +1,6 @@
-export enum roleFlags {
-  Admin = 1 << 0,
+export enum roleFlags { //4 bits max int value 15
+  User = 1 << 2, //verified user'
   Moderator = 1 << 1,
-  User = 1 << 2, //verified user
-  Unverified = 1 << 3,
+  Admin = 1 << 0,
   Banned = 1 << 4,
 }

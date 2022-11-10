@@ -11,6 +11,9 @@ import { UserResolver } from './user/user.resolver';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
 import { SideMenuModule } from './side-menu/side-menu.module';
+import { ContactService } from './contact/contact.service';
+import { ContactModule } from './contact/contact.module';
+import { MessagesModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -33,9 +36,11 @@ import { SideMenuModule } from './side-menu/side-menu.module';
     AuthModule,
     UserModule,
     ProfileModule,
-    SideMenuModule
+    SideMenuModule,
+    ContactModule,
+    MessagesModule
   ],
   controllers: [],
-  providers: [UserResolver],
+  providers: [UserResolver, ContactService],
 })
 export class AppModule {}
